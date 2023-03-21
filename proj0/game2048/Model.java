@@ -111,24 +111,25 @@ public class Model extends Observable {
         changed = false;
 
         // TODO: Modify this.board (and perhaps this.score) to account
-
+        board.setViewingPerspective(side);
         System.out.println(side);
-        if (side== Side.NORTH){
-            changed =  moveToNorth();
+        changed =  moveToSide();
+//        if (side== Side.NORTH){
+//            changed =  moveToNorth();
 
-        }
-        if (side == Side.SOUTH) {
-            changed =  moveToSouth();
-        }
+//        }
+//        if (side == Side.SOUTH) {
+//            changed =  moveToSouth();
+//        }
+//
+//        if (side == Side.WEST) {
+//            changed = moveToWest();
+//        }
+//        if (side == Side.EAST) {
+//            changed = moveToEast();
+//        }
 
-        if (side == Side.WEST) {
-            changed = moveToWest();
-        }
-        if (side == Side.EAST) {
-            changed = moveToEast();
-        }
-
-
+        board.setViewingPerspective(Side.NORTH);
 
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
@@ -146,7 +147,7 @@ public class Model extends Observable {
         return false;
     }
 
-    private boolean moveToNorth() {
+    private boolean moveToSide() {
         boolean changed = false;
         int size = board.size();
         for (int c = 0; c < size; c = c + 1) {
@@ -193,153 +194,153 @@ public class Model extends Observable {
         return changed;
     }
 
-    private boolean moveToSouth() {
-        boolean changed = false;
-        int size = board.size();
-        for (int c = 0; c < size; c = c + 1) {
-            int row = 0;
-            int col = c;
-            int currVal = 0;
-
-            for (int r = 0; r < size; r = r + 1) {
-                if (board.tile(c,r) != null){
-                    Tile t = board.tile(c,r);
-                    if (currVal != 0 ){
-                        if (currVal == t.value()){
-                            board.move(col, row, t);
-                            if (row != r){
-                                changed = true;
-                            }
-                            score += t.value()*2;
-                            row ++;
-                        }
-                        else{
-                            row ++;
-                            board.move(col, row, t);
-                            if (row != r){
-                                changed = true;
-                            }
-                        }
-                    }
-                    else{
-                        board.move(col, row, t);
-                        if (row != r){
-                            changed = true;
-                        }
-                    }
-
-                    if (board.tile(col,row) != null){
-                        currVal = board.tile(col,row).value();
-                    }
-                    else{
-                        currVal =0;
-                    }
-                }
-            }
-        }
-        return changed;
-    }
-
-
-
-    private boolean moveToWest() {
-        boolean changed = false;
-        int size = board.size();
-        for (int r = 0; r < size; r = r + 1) {
-            int row = r;
-            int col = 0;
-            int currVal = 0;
-
-            for (int c = 0; c < size; c = c + 1) {
-                if (board.tile(c,r) != null){
-                    Tile t = board.tile(c,r);
-                    if (currVal != 0 ){
-                        if (currVal == t.value()){
-                            board.move(col, row, t);
-                            if (col != c){
-                                changed = true;
-                            }
-                            score += t.value()*2;
-                            col ++;
-                        }
-                        else{
-                            col ++;
-                            board.move(col, row, t);
-                            if (col != c){
-                                changed = true;
-                            }
-
-                        }
-                    }
-                    else{
-                        board.move(col, row, t);
-                        if (col != c){
-                            changed = true;
-                        }
-
-                    }
-
-                    if (board.tile(col,row) != null){
-                        currVal = board.tile(col,row).value();
-                    }
-                    else{
-                        currVal =0;
-                    }
-                }
-            }
-        }
-        return changed;
-    }
-
-
-
-    private boolean moveToEast() {
-        boolean changed = false;
-        int size = board.size();
-        for (int r = 0; r < size; r = r + 1) {
-            int row = r;
-            int col = size-1;
-            int currVal = 0;
-
-            for (int c = size-1; c >= 0; c = c - 1) {
-                if (board.tile(c,r) != null){
-                    Tile t = board.tile(c,r);
-                    if (currVal != 0 ){
-                        if (currVal == t.value()){
-                            board.move(col, row, t);
-                            if (col != c){
-                                changed = true;
-                            }
-                            score += t.value()*2;
-                            col --;
-                        }
-                        else{
-                            col --;
-                            board.move(col, row, t);
-                            if (col != c){
-                                changed = true;
-                            }
-                        }
-                    }
-                    else{
-                        board.move(col, row, t);
-                        if (col != c){
-                            changed = true;
-                        }
-                    }
-
-                    if (board.tile(col,row) != null){
-                        currVal = board.tile(col,row).value();
-                    }
-                    else{
-                        currVal =0;
-                    }
-                }
-            }
-        }
-        return changed;
-
-    }
+//    private boolean moveToSouth() {
+//        boolean changed = false;
+//        int size = board.size();
+//        for (int c = 0; c < size; c = c + 1) {
+//            int row = 0;
+//            int col = c;
+//            int currVal = 0;
+//
+//            for (int r = 0; r < size; r = r + 1) {
+//                if (board.tile(c,r) != null){
+//                    Tile t = board.tile(c,r);
+//                    if (currVal != 0 ){
+//                        if (currVal == t.value()){
+//                            board.move(col, row, t);
+//                            if (row != r){
+//                                changed = true;
+//                            }
+//                            score += t.value()*2;
+//                            row ++;
+//                        }
+//                        else{
+//                            row ++;
+//                            board.move(col, row, t);
+//                            if (row != r){
+//                                changed = true;
+//                            }
+//                        }
+//                    }
+//                    else{
+//                        board.move(col, row, t);
+//                        if (row != r){
+//                            changed = true;
+//                        }
+//                    }
+//
+//                    if (board.tile(col,row) != null){
+//                        currVal = board.tile(col,row).value();
+//                    }
+//                    else{
+//                        currVal =0;
+//                    }
+//                }
+//            }
+//        }
+//        return changed;
+//    }
+//
+//
+//
+//    private boolean moveToWest() {
+//        boolean changed = false;
+//        int size = board.size();
+//        for (int r = 0; r < size; r = r + 1) {
+//            int row = r;
+//            int col = 0;
+//            int currVal = 0;
+//
+//            for (int c = 0; c < size; c = c + 1) {
+//                if (board.tile(c,r) != null){
+//                    Tile t = board.tile(c,r);
+//                    if (currVal != 0 ){
+//                        if (currVal == t.value()){
+//                            board.move(col, row, t);
+//                            if (col != c){
+//                                changed = true;
+//                            }
+//                            score += t.value()*2;
+//                            col ++;
+//                        }
+//                        else{
+//                            col ++;
+//                            board.move(col, row, t);
+//                            if (col != c){
+//                                changed = true;
+//                            }
+//
+//                        }
+//                    }
+//                    else{
+//                        board.move(col, row, t);
+//                        if (col != c){
+//                            changed = true;
+//                        }
+//
+//                    }
+//
+//                    if (board.tile(col,row) != null){
+//                        currVal = board.tile(col,row).value();
+//                    }
+//                    else{
+//                        currVal =0;
+//                    }
+//                }
+//            }
+//        }
+//        return changed;
+//    }
+//
+//
+//
+//    private boolean moveToEast() {
+//        boolean changed = false;
+//        int size = board.size();
+//        for (int r = 0; r < size; r = r + 1) {
+//            int row = r;
+//            int col = size-1;
+//            int currVal = 0;
+//
+//            for (int c = size-1; c >= 0; c = c - 1) {
+//                if (board.tile(c,r) != null){
+//                    Tile t = board.tile(c,r);
+//                    if (currVal != 0 ){
+//                        if (currVal == t.value()){
+//                            board.move(col, row, t);
+//                            if (col != c){
+//                                changed = true;
+//                            }
+//                            score += t.value()*2;
+//                            col --;
+//                        }
+//                        else{
+//                            col --;
+//                            board.move(col, row, t);
+//                            if (col != c){
+//                                changed = true;
+//                            }
+//                        }
+//                    }
+//                    else{
+//                        board.move(col, row, t);
+//                        if (col != c){
+//                            changed = true;
+//                        }
+//                    }
+//
+//                    if (board.tile(col,row) != null){
+//                        currVal = board.tile(col,row).value();
+//                    }
+//                    else{
+//                        currVal =0;
+//                    }
+//                }
+//            }
+//        }
+//        return changed;
+//
+//    }
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
      */
